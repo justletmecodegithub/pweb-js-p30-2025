@@ -22,65 +22,33 @@
 
   <section class="content">
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="🔍 Search recipes by name, cuisine, or ingredients..." />
+      <input type="text" id="searchInput" placeholder="🔍 Search recipes by name, cuisine, ingredients, or tags..." />
     </div>
 
     <div class="filter-bar">
-        <label for="cuisineSelect">Cuisine:</label>
-         <select id="cuisineSelect">
-         <option value="all">All</option>
-         <option value="korean">Korean</option>
-            <option value="italian">Italian</option>
-         <option value="japanese">Japanese</option>
-            <option value="indonesian">Indonesian</option>
-         <option value="mexican">Mexican</option>
-            <option value="american">American</option>
-        </select>
+      <label for="cuisineSelect">Cuisine:</label>
+      <select id="cuisineSelect">
+        <option value="">All</option>
+      </select>
     </div>
 
-    <div class="recipe-grid">
-      <!-- sample card 1 -->
-      <div class="recipe-card glassy">
-        <img src="assets/img/ramyun.jpeg" alt="Recipe" />
-        <div class="recipe-details">
-          <div class="rating">⭐ 4.9</div>
-          <h3>Ramyun Delight</h3>
-          <p class="info">⏱ 25 mins | 🍳 Medium | 🇰🇷 Korean</p>
-          <p class="ingredients">Ingredients: noodles, egg, chili oil, +3 more</p>
-          <button class="view-btn">View Full Recipe</button>
-        </div>
-      </div>
+    <div id="loading" style="text-align:center; display:none;">Loading recipes...</div>
 
-      <!-- sample card 2 -->
-      <div class="recipe-card glassy">
-        <img src="assets/img/images2.jpeg" alt="Recipe" />
-        <div class="recipe-details">
-          <div class="rating">⭐ 4.8</div>
-          <h3>Pasta Primavera</h3>
-          <p class="info">⏱ 40 mins | 🍳 Easy | 🇮🇹 Italian</p>
-          <p class="ingredients">Ingredients: pasta, basil, tomato, +2 more</p>
-          <button class="view-btn">View Full Recipe</button>
-        </div>
-      </div>
-
-      <!-- sample card 3 -->
-      <div class="recipe-card glassy">
-        <img src="assets/img/sample1.jpg" alt="Recipe" />
-        <div class="recipe-details">
-          <div class="rating">⭐ 4.7</div>
-          <h3>Sushi Bento</h3>
-          <p class="info">⏱ 50 mins | 🍳 Hard | 🇯🇵 Japanese</p>
-          <p class="ingredients">Ingredients: rice, nori, salmon, +5 more</p>
-          <button class="view-btn">View Full Recipe</button>
-        </div>
-      </div>
-    </div>
+    <div id="recipesGrid" class="recipe-grid"></div>
 
     <div class="show-more">
       <button id="showMoreBtn" class="view-btn">Show More</button>
     </div>
   </section>
-  <script src="js/Utility.js"></script>
+
+  <!-- Modal -->
+  <div id="recipeModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); overflow:auto; z-index:20;">
+    <div id="modalContent" style="background:white; margin:5% auto; padding:2rem; border-radius:12px; width:90%; max-width:700px; position:relative;">
+      <span class="close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem;">✖</span>
+    </div>
+  </div>
+
+  <script src="js/utility.js"></script>
   <script src="js/login.js"></script>
   <script src="js/recipes.js"></script>
 </body>
