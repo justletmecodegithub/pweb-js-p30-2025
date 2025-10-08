@@ -122,25 +122,44 @@ class RecipesApp {
     this.openModal(recipe);
   }
 
-  openModal(r) {
-    const modal = document.getElementById('recipeModal');
-    const content = document.getElementById('modalContent');
-    if (!modal || !content) return;
+openModal(r) {
+  const modal = document.getElementById('recipeModal');
+  const content = document.getElementById('modalContent');
+  if (!modal || !content) return;
 
-    content.innerHTML = `
-      <span class="close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem;">✖</span>
-      <img src="${r.image}" alt="${r.name}" style="width:100%; border-radius:8px; margin-bottom:1rem;">
-      <h2>${r.name}</h2>
-      <p><strong>Prep:</strong> ${r.prepTimeMinutes} min | <strong>Cook:</strong> ${r.cookTimeMinutes} min</p>
+  const tagsHTML = r.tags && r.tags.length ? `
+    <p><strong>Tags:</strong> ${r.tags.join(', ')}</p>
+  ` : '';
+
+  const mealTypeHTML = r.mealType && r.mealType.length ? `
+    <p><strong>Meal Type:</strong> ${r.mealType.join(', ')}</p>
+  ` : '';
+
+  content.innerHTML = `
+    <span class="close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem;">✖</span>
+    <img src="${r.image}" alt="${r.name}" style="width:100%; border-radius:8px; margin-bottom:1rem;">
+    <h2>${r.name}</h2>
+    <div style="margin-bottom:1rem;">
+      <p><strong>Prep Time:</strong> ${r.prepTimeMinutes} min</p>
+      <p><strong>Cook Time:</strong> ${r.cookTimeMinutes} min</p>
+      <p><strong>Servings:</strong> ${r.servings}</p>
+      <p><strong>Calories/Serving:</strong> ${r.caloriesPerServing}</p>
       <p><strong>Difficulty:</strong> ${r.difficulty}</p>
       <p><strong>Cuisine:</strong> ${r.cuisine}</p>
-      <p><strong>Ingredients:</strong></p>
-      <ul>${r.ingredients.map((i) => `<li>${i}</li>`).join('')}</ul>
-      <p><strong>Instructions:</strong></p>
-      <ol>${r.instructions.map((i) => `<li>${i}</li>`).join('')}</ol>`;
-    modal.style.display = 'block';
-    document.querySelector('.close').addEventListener('click', () => this.closeModal());
-  }
+      ${mealTypeHTML}
+      ${tagsHTML}
+      <p><strong>Rating:</strong> ⭐ ${r.rating} (${r.reviewCount} reviews)</p>
+    </div>
+    <h3>Ingredients:</h3>
+    <ul>${r.ingredients.map((i) => `<li>${i}</li>`).join('')}</ul>
+    <h3>Instructions:</h3>
+    <ol>${r.instructions.map((i) => `<li>${i}</li>`).join('')}</ol>
+  `;
+
+  modal.style.display = 'block';
+  document.querySelector('.close').addEventListener('click', () => this.closeModal());
+}
+
 
   closeModal() {
     const modal = document.getElementById('recipeModal');
